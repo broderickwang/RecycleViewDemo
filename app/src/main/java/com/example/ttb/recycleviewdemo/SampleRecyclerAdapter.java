@@ -1,6 +1,7 @@
 package com.example.ttb.recycleviewdemo;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,13 @@ public class SampleRecyclerAdapter extends RecyclerView.Adapter<SampleRecyclerAd
         //  设置要显示的数据
         viewHolder.textViewSample.setText(rowData);
         viewHolder.itemView.setTag(rowData);
+        viewHolder.textViewSample2.setText(rowData);
+
+        ViewGroup vg = (ViewGroup)viewHolder.itemView;
+        Log.d("TAG", "onBindViewHolder: "+vg.getChildCount());
+        if(position%2 == 0){
+            vg.removeView(viewHolder.textViewSample2);
+        }
     }
 
     @Override
@@ -62,6 +70,7 @@ public class SampleRecyclerAdapter extends RecyclerView.Adapter<SampleRecyclerAd
     {
 
         private final TextView textViewSample;
+        private final TextView textViewSample2;
 
         public ViewHolder(View itemView)
         {
@@ -69,6 +78,7 @@ public class SampleRecyclerAdapter extends RecyclerView.Adapter<SampleRecyclerAd
 
             textViewSample = (TextView) itemView
                     .findViewById(R.id.content);
+            textViewSample2 = (TextView)itemView.findViewById(R.id.content2);
         }
     }
 }
